@@ -20,11 +20,11 @@ import java.util.concurrent.TimeUnit;
 public class PlayerInteractAtEntityListener implements Listener {
 
     private static HashMap<UUID, Date> cowLastMilked;
-    private Main plugin;
+    private Main _plugin;
 
-    public PlayerInteractAtEntityListener(Main _plugin) {
-        plugin = _plugin;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+    public PlayerInteractAtEntityListener(Main plugin) {
+        this._plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(this, this._plugin);
         cowLastMilked = new HashMap<>();
     }
 
@@ -39,12 +39,12 @@ public class PlayerInteractAtEntityListener implements Listener {
             if (!cowLastMilked.containsKey(entity.getUniqueId())) {
                 cowLastMilked.put(entity.getUniqueId(), new Date());
                 CowMilkedEvent event = new CowMilkedEvent(player, entity);
-                plugin.getServer().getPluginManager().callEvent(event);
+                _plugin.getServer().getPluginManager().callEvent(event);
             } else {
                 long timeSinceLastMilked = Util.getDateDiff(cowLastMilked.get(entity.getUniqueId()), new Date(), TimeUnit.SECONDS);
                 if (timeSinceLastMilked > 60) {
                     CowMilkedEvent event = new CowMilkedEvent(player, entity);
-                    plugin.getServer().getPluginManager().callEvent(event);
+                    _plugin.getServer().getPluginManager().callEvent(event);
                 } else {
                     long timeUntilNextMilk = 60 - timeSinceLastMilked;
                     player.sendMessage(Util.makeChat("&eYou milked a cow recently, wait " + timeUntilNextMilk + " seconds to try again."));
