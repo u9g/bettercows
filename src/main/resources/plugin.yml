@@ -1,0 +1,7 @@
+name: BetterCows
+version: ${project.version}
+main: me.u9g.bettercows.Main
+api-version: 1.17
+authors: [ U9G ]
+description: Make cows better
+website: github.com/u9g
