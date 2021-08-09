@@ -9,7 +9,6 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         System.out.println("BetterCows Loaded!");
         new PlayerInteractAtEntityListener(this);
         new CowMilkedListener(this);
@@ -18,6 +17,5 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         System.out.println("BetterCows Unloaded!");
-        // Plugin shutdown logic
     }
 }
