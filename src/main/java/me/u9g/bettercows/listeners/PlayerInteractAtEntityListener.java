@@ -33,8 +33,8 @@ public class PlayerInteractAtEntityListener implements Listener {
         Entity entity = e.getRightClicked();
         Player player = e.getPlayer();
         if (
-                (player.getInventory().getItemInMainHand().getType().equals(Material.BUCKET) || player.getInventory().getItemInOffHand().getType().equals(Material.BUCKET)) &&
-                entity.getType().equals(EntityType.COW)
+            (player.getInventory().getItemInMainHand().getType().equals(Material.BUCKET) || player.getInventory().getItemInOffHand().getType().equals(Material.BUCKET)) &&
+            entity.getType().equals(EntityType.COW)
         ) {
             if (!cowLastMilked.containsKey(entity.getUniqueId())) {
                 cowLastMilked.put(entity.getUniqueId(), new Date());
