@@ -9,13 +9,13 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        System.out.println("BetterCows Loaded!");
+        getLogger().info("BetterCows enabled");
         new PlayerInteractAtEntityListener(this);
         new CowMilkedListener(this);
     }
 
     @Override
     public void onDisable() {
-        System.out.println("BetterCows Unloaded!");
+        getLogger().info("BetterCows disabled");
     }
 }
