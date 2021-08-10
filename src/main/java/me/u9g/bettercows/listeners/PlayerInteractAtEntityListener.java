@@ -5,6 +5,7 @@ import me.u9g.bettercows.Util;
 import me.u9g.bettercows.events.CowMilkedEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -33,8 +34,7 @@ public class PlayerInteractAtEntityListener implements Listener {
         Entity entity = e.getRightClicked();
         Player player = e.getPlayer();
         if (
-            (player.getInventory().getItemInMainHand().getType().equals(Material.BUCKET) || player.getInventory().getItemInOffHand().getType().equals(Material.BUCKET)) &&
-            entity.getType().equals(EntityType.COW)
+            player.getInventory().getItemInMainHand().getType().equals(Material.BUCKET) && entity.getType().equals(EntityType.COW)
         ) {
             if (!cowLastMilked.containsKey(entity.getUniqueId())) {
                 cowLastMilked.put(entity.getUniqueId(), new Date());
@@ -45,6 +45,7 @@ public class PlayerInteractAtEntityListener implements Listener {
                 if (timeSinceLastMilked > 60) {
                     CowMilkedEvent event = new CowMilkedEvent(player, entity);
                     _plugin.getServer().getPluginManager().callEvent(event);
+                    cowLastMilked.replace(entity.getUniqueId(), new Date());
                 } else {
                     long timeUntilNextMilk = 60 - timeSinceLastMilked;
                     player.sendMessage(Util.makeChat("&eYou milked a cow recently, wait " + timeUntilNextMilk + " seconds to try again."));
